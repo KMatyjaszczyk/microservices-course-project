@@ -1,0 +1,18 @@
+spring.application.name: Registration
+spring.config.import: configserver:http://config-server:8888
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:8761/eureka
+eureka.instance.prefer-ip-address: true
+resilience4j.circuitbreaker:
+  instances:
+    active-process:
+      failureRateThreshold: 90 # procent błędnych zapytań
+      slidingWindowType: TIME_BASED # slidingWindowSize w sekundach
+      slidingWindowSize: 50 # ile czasu trwa okno
+      minimumNumberOfCalls: 5 # minimalna ilość zapytań
+      waitDurationInOpenState: 5s # czas w stanie otwartym
+      permittedNumberOfCallsInHalfOpenState: 1 # ile zapytań aby wyjść ze stanu półotwartego

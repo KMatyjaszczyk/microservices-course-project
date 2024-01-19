@@ -1,0 +1,42 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: Gateway
+  cloud:
+    gateway:
+      routes:
+        - id: registration-register
+          uri: lb://Registration
+          predicates:
+            - Path=/register
+        - id: registration-active
+          uri: lb://Registration
+          predicates:
+            - Path=/active
+        - id: registration-close
+          uri: lb://Registration
+          predicates:
+            - Path=/close
+        - id: coupons-issue
+          uri: lb://Coupons
+          predicates:
+            - Path=/issue
+        - id: coupons-use
+          uri: lb://Coupons
+          predicates:
+            - Path=/use
+        - id: customers
+          uri: lb://Customers
+          predicates:
+            - Path=/customers/*
+            - Method=GET,DELETE
+          filters:
+            - CustomRouteFilter
+        - id: customers
+          uri: lb://Customers
+          predicates:
+            - Path=/customers
+            - Method=GET,POST
+          filters:
+            - CustomRouteFilter

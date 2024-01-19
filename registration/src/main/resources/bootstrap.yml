@@ -1,0 +1,7 @@
+#spring:
+#  config:
+#    import: configserver:http://10.247.54.147:8888
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.247.54.147:8761/eureka

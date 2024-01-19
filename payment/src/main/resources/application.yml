@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Payment
+  config:
+    import: configserver:http://localhost:8888
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+spring.datasource.url: jdbc:h2:mem:payment
+server:
+  port: 0
